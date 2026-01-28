@@ -21,6 +21,14 @@ public class DocumentService {
         return this.documentRepository.save(doc);
     }
 
+    public Document update (Document doc){
+        Document document=this.documentRepository.findById(doc.getId()).orElse(null);
+        document.setContent(doc.getContent());
+        doc=this.documentRepository.save(document);
+        return doc;
+
+    }
+
     public List<Document> search(String keyword) {
         return this.documentRepository.search(keyword);
     }

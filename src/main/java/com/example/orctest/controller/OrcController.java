@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,8 @@ import com.example.orctest.service.ExportService;
 import com.example.orctest.service.OcrService;
 
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -97,5 +100,10 @@ public class OrcController {
     public ResponseEntity<Void> deleteDocument(@PathVariable("id") Long id){
         this.documentService.deleteDocument(id);
         return ResponseEntity.ok().body(null);
+    }
+
+    @PutMapping("/document")
+    public ResponseEntity<Document> update(@RequestBody Document document) {
+        return ResponseEntity.ok().body(this.documentService.update(document));
     }
 }
